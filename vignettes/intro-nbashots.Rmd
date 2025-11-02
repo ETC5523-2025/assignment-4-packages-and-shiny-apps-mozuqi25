@@ -1,0 +1,150 @@
+---
+title: "Introduction to asg4nbashots"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to asg4nbashots}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7, fig.height = 4.5,
+  out.width = "100%"
+)
+```
+
+# Overview
+
+The **asg4nbashots** package provides a cleaned NBA shot-level dataset (1997–2020) and helper functions  
+for quick exploration and visualisation, along with a bundled Shiny app for interactive analysis.
+
+It allows users to:
+
+- Explore millions of NBA shot attempts by distance, zone, and season type  
+- Summarise accuracy and expected points trends  
+- Launch an interactive app for deeper exploration
+
+---
+
+# Load the package and data
+
+``` {r, eval=FALSE}
+library(asg4nbashots)
+
+# Load the packaged dataset
+data("nba_shots")
+
+# View the structure
+dplyr::glimpse(nba_shots)
+```
+
+---
+
+# Basic summaries
+
+Here’s how to compute shot accuracy by year and zone using the built-in helper function.
+
+```{r, eval=FALSE}
+shot_zone_summary()
+```
+
+You can also manually create a quick summary with `dplyr`:
+
+``` {r, eval=FALSE}
+library(dplyr)
+library(lubridate)
+
+nba_shots |>
+  mutate(year = year(game_date)) |>
+  group_by(year) |>
+  summarise(
+    attempts = n(),
+    made = sum(shot_made_flag),
+    accuracy = made / attempts,
+    .groups = "drop"
+  )
+```
+
+---
+
+# Accuracy and expected points by distance
+
+``` {r, eval=FALSE}
+library(ggplot2)
+
+summary_df <- nba_shots |>
+  group_by(shot_distance) |>
+  summarise(
+    accuracy = mean(shot_made_flag),
+    expected_points = mean(shot_type * shot_made_flag),
+    .groups = "drop"
+  )
+
+ggplot(summary_df, aes(shot_distance)) +
+  geom_point(aes(y = accuracy), color = "steelblue") +
+  geom_point(aes(y = expected_points), color = "red") +
+  labs(
+    title = "Accuracy and Expected Points by Distance",
+    x = "Distance (ft)",
+    y = "Average Accuracy / Expected Points"
+  ) +
+  theme_minimal()
+```
+
+---
+
+# Exploring categorical shot zones
+
+You can also look at field-goal accuracy by court zone and season type.
+
+``` {r, eval=FALSE}
+nba_shots |>
+  group_by(season_type, shot_zone_basic) |>
+  summarise(
+    attempts = n(),
+    made = sum(shot_made_flag),
+    accuracy = made / attempts,
+    .groups = "drop"
+  ) |>
+  ggplot(aes(x = shot_zone_basic, y = accuracy, fill = season_type)) +
+  geom_col(position = "dodge") +
+  coord_flip() +
+  labs(
+    title = "Shot Accuracy by Zone and Season Type",
+    x = "Shot Zone (Basic)",
+    y = "Accuracy"
+  ) +
+  theme_minimal()
+[chunk-end]
+
+```
+
+# Launch the interactive Shiny app
+
+``` {r, eval=FALSE}
+# run_nbashots_app()
+```
+
+The app provides an interactive interface to explore shot location patterns,  
+accuracy by player or year, and expected points per distance.
+
+---
+
+# Reproducibility
+
+- Data cleaning pipeline: `data-raw/nba_shots.R`  
+- Packaged dataset: `data/nba_shots.rda` (≈18.8 MB)  
+- Source: *data.world/sportsvizsunday* (cleaned and extended)
+
+This ensures transparent and reproducible data preparation for analysis and visualisation.
+
+---
+
+# References
+
+- *Tidyverse* packages — data manipulation and plotting  
+- *shiny* — interactive app framework  
+- *usethis*, *devtools* — package development workflow

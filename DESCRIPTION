@@ -1,0 +1,29 @@
+Package: asg4nbashots
+Title: NBA Shot Data 1997–2020 Explorer
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Mohammad Zulkifli",
+           family = "Falaqi",
+           email = "mfal0012@student.monash.edu",
+           role = c("aut", "cre"))
+Description: An R package providing cleaned NBA shot location data with over 4 million observations from 1997–2020, along with a Shiny app for interactive exploration and visualization.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Depends: 
+    R (>= 3.5)
+LazyData: true
+LazyDataCompression: xz
+Imports: 
+    shiny,
+    dplyr,
+    lubridate
+Suggests: 
+    knitr,
+    ggplot2,
+    readr,
+    janitor,
+    rmarkdown,
+    bslib
+VignetteBuilder: knitr

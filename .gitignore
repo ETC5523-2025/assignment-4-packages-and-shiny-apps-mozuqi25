@@ -1,0 +1,11 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.DS_Store
+data-raw/nba_shots_97_20.csv
+inst/doc
+/doc/
+/Meta/
+.Rcheck/
+docs/*.html
