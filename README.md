@@ -24,8 +24,8 @@ and analysis.
 - 📚 **Documentation:** includes help pages, a vignette, and a pkgdown
   website
 
-**Pkgdown site:** <https://YOUR-USERNAME.github.io/YOUR-REPO/>  
-*(replace with the actual link after enabling GitHub Pages)*
+**Pkgdown site:**
+<https://etc5523-2025.github.io/assignment-4-packages-and-shiny-apps-mozuqi25/>
 
 ## Installation
 
@@ -81,7 +81,7 @@ Each row represents one shot attempt.
 | `shot_zone_range` | Factor | Distance range (e.g., Less Than 8 ft., 8–16 ft., 16–24 ft., 24+ ft.). |
 | `x_location` | Integer | X-coordinate of the shot on the court. |
 | `y_location` | Integer | Y-coordinate of the shot on the court. |
-| `shot_type` | Integer | Shot value — 2 or 3 points. |
+| `shot_type` | Integer | Shot value (2 or 3 points). |
 | `shot_made_flag` | Integer | 1 if the shot was made, 0 if missed. |
 | `game_date` | Date | Date of the game (YYYY-MM-DD). |
 | `season_type` | Factor | Season type (Regular Season or Playoffs). |
@@ -182,8 +182,8 @@ browseVignettes("asg4nbashots")
 All documentation, including dataset details, functions, and vignettes,
 is also available through the package website (built with **pkgdown**):
 
-👉 **Pkgdown site:** <https://YOUR-USERNAME.github.io/YOUR-REPO/>
-*(replace with the actual link once GitHub Pages is enabled)*
+👉 **Pkgdown site:**
+<https://etc5523-2025.github.io/assignment-4-packages-and-shiny-apps-mozuqi25/>
 
 This site provides a structured overview of your data, functions, and
 example analyses.
