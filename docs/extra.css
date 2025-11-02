@@ -1,0 +1,11 @@
+/* Change link color */
+a {
+  color: blue;
+  text-decoration: underline;
+}
+
+/* Hover effect */
+a:hover, a:focus {
+  color: darkblue;
+  text-decoration: underline;
+}

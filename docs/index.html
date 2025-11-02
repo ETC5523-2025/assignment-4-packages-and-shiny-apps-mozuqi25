@@ -15,16 +15,17 @@
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="NBA Shot Data 1997–2020 Explorer">
-<meta name="description" content="An R package providing cleaned NBA shot location data with over 4 million observations from 1997–2020, along with a Shiny app for interactive exploration and visualization.">
-<meta property="og:description" content="An R package providing cleaned NBA shot location data with over 4 million observations from 1997–2020, along with a Shiny app for interactive exploration and visualization.">
-<meta property="og:image" content="/logo.png">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
+<meta property="og:title" content="NBA Shot Data 1997–2020 Explorer">
+<meta name="description" content="Provides cleaned and extended NBA shot-level data from 1997–2020, including shot type, distance, court zones, outcomes, and season context. The package also includes a Shiny app for interactive exploration and visualisation of trends in shot selection and efficiency. Inspired by the Stand-up Maths video “We analysed 4,678,387 NBA shots” (YouTube, 2020), using publicly available NBA shot data hosted on data.world/sportsvizsunday. Differences in total observations (~4.7M vs 4.68M cited in the video) likely reflect source compilation or filtering.">
+<meta property="og:description" content="Provides cleaned and extended NBA shot-level data from 1997–2020, including shot type, distance, court zones, outcomes, and season context. The package also includes a Shiny app for interactive exploration and visualisation of trends in shot selection and efficiency. Inspired by the Stand-up Maths video “We analysed 4,678,387 NBA shots” (YouTube, 2020), using publicly available NBA shot data hosted on data.world/sportsvizsunday. Differences in total observations (~4.7M vs 4.68M cited in the video) likely reflect source compilation or filtering.">
+<meta property="og:image" content="https://etc5523-2025.github.io/assignment-4-packages-and-shiny-apps-mozuqi25/logo.png">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
-    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
+    <nav class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
 
     <a class="navbar-brand me-2" href="index.html">asg4nbashots</a>
 
@@ -37,18 +38,12 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
+<li class="active nav-item"><a class="nav-link" href="index.html">Home</a></li>
 <li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
-<li class="nav-item dropdown">
-  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="articles/intro-nbashots.html">Introduction to asg4nbashots</a></li>
-  </ul>
-</li>
+<li class="nav-item"><a class="nav-link" href="articles/intro-nbashots.html">Article</a></li>
       </ul>
 <ul class="navbar-nav">
-<li class="nav-item"><form class="form-inline" role="search">
- <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
-</form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/ETC5523-2025/assignment-4-packages-and-shiny-apps-mozuqi25"><span class="fa fab fa-github"></span></a></li>
       </ul>
 </div>
 
@@ -63,30 +58,31 @@
 </h1>
 </div>
 <!-- badges: start -->
-<!-- Add project badges here later if desired -->
-<!-- badges: end -->
-<p><strong>asg4nbashots</strong> is an R package that provides cleaned NBA shot-level data (1997–2020) and an integrated Shiny app for interactive exploration and analysis.</p>
+
+<p><code>asg4nbashots</code> package provides cleaned <strong>NBA Shot Data (1997–2020)</strong>, including shot types, distances, court zones, outcomes, and season context, plus a bundled Shiny app for interactive exploration and visualisation.</p>
+<p>This package was inspired by the Stand-up Maths video <strong>“<a href="https://www.youtube.com/watch?v=yh5c3duQQ1w" class="external-link">We analysed 4,678,387 NBA shots</a>”</strong>.</p>
+<p>The video does not publish a dataset or cleaning pipeline, hence this package uses a public dataset on <a href="https://data.world/sportsvizsunday/june-2020-nba-shots-1997-2019" class="external-link">data.world/sportsvizsunday</a> covering a similar period and variables. After cleaning and standardisation, the resulting dataset contains <strong>~4.7 million</strong> rows (slightly more than the 4.68M mentioned in the video), likely due to source compilation or filtering differences.</p>
 <div class="section level3">
 <h3 id="key-features">Key features<a class="anchor" aria-label="anchor" href="#key-features"></a>
 </h3>
 <ul>
-<li>🏀 <strong>Comprehensive dataset:</strong> over 4.7 million shot attempts with variables<br><code>shot_distance</code>, <code>x_location</code>, <code>y_location</code>, <code>shot_made_flag</code>, and <code>year</code>
+<li>🏀 <strong>Comprehensive dataset:</strong> over 4.7 million shot attempts with 11 variables including<br><code>shot_distance</code>, <code>x_location</code>, <code>y_location</code>, <code>shot_type</code>, <code>shot_made_flag</code>, and <code>game_date</code>
 </li>
 <li>💡 <strong>Interactive app:</strong> launch with <code><a href="reference/run_nbashots_app.html">run_nbashots_app()</a></code> to explore accuracy and expected-points trends</li>
 <li>📚 <strong>Documentation:</strong> includes help pages, a vignette, and a pkgdown website</li>
 </ul>
-<p><strong>Pkgdown site:</strong> <a href="https://etc5523-2025.github.io/assignment-4-packages-and-shiny-apps-mozuqi25/" class="external-link uri">https://etc5523-2025.github.io/assignment-4-packages-and-shiny-apps-mozuqi25/</a></p>
+<p><strong>Pkgdown site:</strong> <a href="https://etc5523-2025.github.io/assignment-4-packages-and-shiny-apps-mozuqi25/" class="uri">https://etc5523-2025.github.io/assignment-4-packages-and-shiny-apps-mozuqi25/</a></p>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of <code>asg4nbashots</code> package from GitHub using <code>remotes</code>:</p>
+<p>You can install the <code>asg4nbashots</code> package from GitHub using <code>remotes</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"ETC5523-2025/assignment-4-packages-and-shiny-apps-mozuqi25"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Load the package</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">asg4nbashots</span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://etc5523-2025.github.io/assignment-4-packages-and-shiny-apps-mozuqi25/">asg4nbashots</a></span><span class="op">)</span></span></code></pre></div>
 <p>After installation, you can load the package and explore the dataset or launch the Shiny app:</p>
 </div>
 <div class="section level2">
@@ -190,21 +186,13 @@ with a size of approximately <strong>18.8 MB</strong>, enabling efficient loadin
 <p>This example illustrates how to calculate two common performance metrics:</p>
 <ul>
 <li>
-<strong>Accuracy</strong> — the percentage of made shots at each distance<br>
+<strong>Accuracy</strong>: the percentage of made shots at each distance<br>
 </li>
 <li>
-<strong>Expected points</strong> — the average points scored per attempt, based on shot success and shot type (2- or 3-point)</li>
+<strong>Expected points</strong>: the average points scored per attempt, based on shot success and shot type (2 or 3-point)</li>
 </ul>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Attaching package: 'dplyr'</span></span>
-<span><span class="co">#&gt; The following objects are masked from 'package:stats':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     filter, lag</span></span>
-<span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Compute accuracy and expected points by distance</span></span>
@@ -218,7 +206,7 @@ with a size of approximately <strong>18.8 MB</strong>, enabling efficient loadin
 <span></span>
 <span><span class="co"># Plot both metrics</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">summary_df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">shot_distance</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">accuracy</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"steelblue"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">accuracy</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">expected_points</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
 <span>    title <span class="op">=</span> <span class="st">"Accuracy and Expected Points by Distance"</span>,</span>
@@ -233,12 +221,12 @@ with a size of approximately <strong>18.8 MB</strong>, enabling efficient loadin
 <h2 id="reproducibility-and-data-size">Reproducibility and Data Size<a class="anchor" aria-label="anchor" href="#reproducibility-and-data-size"></a>
 </h2>
 <ul>
-<li><p>The <strong>original raw CSV file</strong> contains more than 4 million rows and is approximately <strong>857 MB</strong> in size.<br>
+<li><p>The <strong>original raw CSV file</strong> contains more than 4.7 million rows and is <strong>857 MB</strong> in size.<br>
 It is <strong>not included in this repository</strong> due to GitHub’s file size limits and best practice for package distribution.</p></li>
 <li><p>The package instead provides a <strong>cleaned and compressed dataset</strong> (<code>data/nba_shots.rda</code>),<br>
-which is only around <strong>13 MB</strong>, allowing for fast loading and easy sharing.</p></li>
+which is only around <strong>18.8 MB</strong>, for faster loading and easier sharing.</p></li>
 <li><p>The full data-cleaning and preparation process is documented in<br><code>data-raw/nba_shots.R</code>, ensuring full reproducibility.</p></li>
-<li><p>If you need the full CSV version, you can follow the download link and detailed steps<br>
+<li><p>If you need the full CSV version, you can follow the data source link and detailed steps<br>
 provided in the <strong>vignette</strong> or the <strong>pkgdown</strong> documentation website.</p></li>
 </ul>
 <p>This design keeps the package lightweight while preserving data transparency.</p>
@@ -251,8 +239,7 @@ and interpret the NBA shot data using both static plots and the Shiny app.</p>
 <p>You can open it directly in R with:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/browseVignettes.html" class="external-link">browseVignettes</a></span><span class="op">(</span><span class="st">"asg4nbashots"</span><span class="op">)</span></span></code></pre></div>
-<p>All documentation, including dataset details, functions, and vignettes, is also available through the package website (built with <strong>pkgdown</strong>):</p>
-<p>👉 <strong>Pkgdown site:</strong> <a href="https://etc5523-2025.github.io/assignment-4-packages-and-shiny-apps-mozuqi25/" class="external-link uri">https://etc5523-2025.github.io/assignment-4-packages-and-shiny-apps-mozuqi25/</a></p>
+<p>All documentation, including dataset details, functions, and vignettes, is also available through the package website (built with <strong>pkgdown</strong>): <a href="https://etc5523-2025.github.io/assignment-4-packages-and-shiny-apps-mozuqi25/" class="uri">https://etc5523-2025.github.io/assignment-4-packages-and-shiny-apps-mozuqi25/</a></p>
 <p>This site provides a structured overview of your data, functions, and example analyses.</p>
 </div>
 <div class="section level2">
@@ -269,10 +256,18 @@ If you notice a data issue, find a bug, or have an idea for improvement, please 
 <p>This package is released under the <strong>MIT License</strong>.<br>
 You are free to use, modify, and distribute it with attribution.</p>
 <p>© <strong>Mohammad Zulkifli Falaqi</strong>, 2025<br>
-Part of the <em>ETC5523 – Communicating With Data</em> unit</p>
+Part of the <em>ETC5523 - Communicating With Data</em> unit <em>Assignment 4</em>.</p>
 </div>
 </div>
-  </main><aside class="col-md-3"><div class="license">
+  </main><aside class="col-md-3"><div class="links">
+<h2 data-toc-skip>Links</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/ETC5523-2025/assignment-4-packages-and-shiny-apps-mozuqi25/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/ETC5523-2025/assignment-4-packages-and-shiny-apps-mozuqi25/issues" class="external-link">Report a bug</a></li>
+</ul>
+</div>
+
+<div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
@@ -295,7 +290,14 @@ Part of the <em>ETC5523 – Communicating With Data</em> unit</p>
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://www.r-project.org/" class="external-link"><img src="https://img.shields.io/badge/made%20with-R-276DC3.svg" alt="made-with-R"></a></li>
+<li><a href="https://etc5523-2025.github.io/assignment-4-packages-and-shiny-apps-mozuqi25/"><img src="https://img.shields.io/badge/docs-pkgdown-blue.svg" alt="pkgdown site"></a></li>
+<li><a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a></li>
+</ul>
+</div>
 
   </aside>
 </div>

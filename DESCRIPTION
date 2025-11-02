@@ -1,29 +1,40 @@
 Package: asg4nbashots
 Title: NBA Shot Data 1997–2020 Explorer
 Version: 0.0.0.9000
-Authors@R: 
-    person(given = "Mohammad Zulkifli",
-           family = "Falaqi",
-           email = "mfal0012@student.monash.edu",
-           role = c("aut", "cre"))
-Description: An R package providing cleaned NBA shot location data with over 4 million observations from 1997–2020, along with a Shiny app for interactive exploration and visualization.
+Authors@R:
+    person("Mohammad Zulkifli", "Falaqi", , "mfal0012@student.monash.edu", role = c("aut", "cre"))
+Description: Provides cleaned and extended NBA shot-level data from
+    1997–2020, including shot type, distance, court zones, outcomes, and
+    season context.  The package also includes a Shiny app for interactive
+    exploration and visualisation of trends in shot selection and
+    efficiency.  Inspired by the Stand-up Maths video “We analysed
+    4,678,387 NBA shots” (YouTube, 2020), using publicly available NBA
+    shot data hosted on data.world/sportsvizsunday. Differences in total
+    observations (~4.7M vs 4.68M cited in the video) likely reflect source
+    compilation or filtering.
 License: MIT + file LICENSE
-Encoding: UTF-8
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
-Depends: 
+URL: 
+    https://etc5523-2025.github.io/assignment-4-packages-and-shiny-apps-mozuqi25/,
+    https://github.com/ETC5523-2025/assignment-4-packages-and-shiny-apps-mozuqi25
+BugReports: 
+    https://github.com/ETC5523-2025/assignment-4-packages-and-shiny-apps-mozuqi25/issues
+Depends:
     R (>= 3.5)
+Imports:
+    dplyr,
+    lubridate,
+    shiny
+Suggests:
+    bslib,
+    ggplot2,
+    janitor,
+    knitr,
+    readr,
+    rmarkdown
+VignetteBuilder:
+    knitr
+Encoding: UTF-8
 LazyData: true
 LazyDataCompression: xz
-Imports: 
-    shiny,
-    dplyr,
-    lubridate
-Suggests: 
-    knitr,
-    ggplot2,
-    readr,
-    janitor,
-    rmarkdown,
-    bslib
-VignetteBuilder: knitr
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2

@@ -18,14 +18,18 @@ knitr::opts_chunk$set(
 
 # Overview
 
-The **asg4nbashots** package provides a cleaned NBA shot-level dataset (1997–2020) and helper functions  
+The **asg4nbashots** package provides a cleaned NBA Shot Data (1997–2020) and helper functions  
 for quick exploration and visualisation, along with a bundled Shiny app for interactive analysis.
+
+The package was inspired by the Stand-up Maths video “[We analysed 4,678,387 NBA shots](https://www.youtube.com/watch?v=yh5c3duQQ1w)”, which discussed how shot selection and expected-points analysis explain modern NBA trends. 
+
+As the video does not publish a dataset or cleaning steps, I use the public “NBA Shot Data 1997–2020” on [data.world/sportsvizsunday](https://data.world/sportsvizsunday/june-2020-nba-shots-1997-2019), covering a similar scope. After cleaning and standardisation, our dataset contains ~4.7M shots (slightly more than 4.68M cited in the video), likely due to differences in source compilation or filtering.
 
 It allows users to:
 
 - Explore millions of NBA shot attempts by distance, zone, and season type  
 - Summarise accuracy and expected points trends  
-- Launch an interactive app for deeper exploration
+- Launch an interactive app for visual exploration
 
 ---
 

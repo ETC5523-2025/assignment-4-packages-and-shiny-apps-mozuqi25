@@ -5,20 +5,35 @@
 
 <!-- badges: start -->
 
-<!-- Add project badges here later if desired -->
-
+[![made-with-R](https://img.shields.io/badge/made%20with-R-276DC3.svg)](https://www.r-project.org/)
+[![pkgdown
+site](https://img.shields.io/badge/docs-pkgdown-blue.svg)](https://etc5523-2025.github.io/assignment-4-packages-and-shiny-apps-mozuqi25/)
+[![License:
+MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 <!-- badges: end -->
 
-**asg4nbashots** is an R package that provides cleaned NBA shot-level
-data (1997–2020) and an integrated Shiny app for interactive exploration
-and analysis.
+`asg4nbashots` package provides cleaned **NBA Shot Data (1997–2020)**,
+including shot types, distances, court zones, outcomes, and season
+context, plus a bundled Shiny app for interactive exploration and
+visualisation.
+
+This package was inspired by the Stand-up Maths video **“[We analysed
+4,678,387 NBA shots](https://www.youtube.com/watch?v=yh5c3duQQ1w)”**.
+
+The video does not publish a dataset or cleaning pipeline, hence this
+package uses a public dataset on
+[data.world/sportsvizsunday](https://data.world/sportsvizsunday/june-2020-nba-shots-1997-2019)
+covering a similar period and variables. After cleaning and
+standardisation, the resulting dataset contains **~4.7 million** rows
+(slightly more than the 4.68M mentioned in the video), likely due to
+source compilation or filtering differences.
 
 ### Key features
 
-- 🏀 **Comprehensive dataset:** over 4.7 million shot attempts with
-  variables  
-  `shot_distance`, `x_location`, `y_location`, `shot_made_flag`, and
-  `year`
+- 🏀 **Comprehensive dataset:** over 4.7 million shot attempts with 11
+  variables including  
+  `shot_distance`, `x_location`, `y_location`, `shot_type`,
+  `shot_made_flag`, and `game_date`
 - 💡 **Interactive app:** launch with `run_nbashots_app()` to explore
   accuracy and expected-points trends
 - 📚 **Documentation:** includes help pages, a vignette, and a pkgdown
@@ -29,8 +44,7 @@ and analysis.
 
 ## Installation
 
-You can install the development version of `asg4nbashots` package from
-GitHub using `remotes`:
+You can install the `asg4nbashots` package from GitHub using `remotes`:
 
 ``` r
 # install.packages("remotes")
@@ -100,20 +114,12 @@ data("nba_shots")
 This example illustrates how to calculate two common performance
 metrics:
 
-- **Accuracy** — the percentage of made shots at each distance  
-- **Expected points** — the average points scored per attempt, based on
-  shot success and shot type (2- or 3-point)
+- **Accuracy**: the percentage of made shots at each distance  
+- **Expected points**: the average points scored per attempt, based on
+  shot success and shot type (2 or 3-point)
 
 ``` r
 library(dplyr)
-#> 
-#> Attaching package: 'dplyr'
-#> The following objects are masked from 'package:stats':
-#> 
-#>     filter, lag
-#> The following objects are masked from 'package:base':
-#> 
-#>     intersect, setdiff, setequal, union
 library(ggplot2)
 
 # Compute accuracy and expected points by distance
@@ -127,7 +133,7 @@ summary_df <- nba_shots %>%
 
 # Plot both metrics
 ggplot(summary_df, aes(x = shot_distance)) +
-  geom_point(aes(y = accuracy), color = "steelblue") +
+  geom_point(aes(y = accuracy), color = "blue") +
   geom_point(aes(y = expected_points), color = "red") +
   labs(
     title = "Accuracy and Expected Points by Distance",
@@ -146,21 +152,21 @@ frequent.
 
 ## Reproducibility and Data Size
 
-- The **original raw CSV file** contains more than 4 million rows and is
-  approximately **857 MB** in size.  
+- The **original raw CSV file** contains more than 4.7 million rows and
+  is **857 MB** in size.  
   It is **not included in this repository** due to GitHub’s file size
   limits and best practice for package distribution.
 
 - The package instead provides a **cleaned and compressed dataset**
   (`data/nba_shots.rda`),  
-  which is only around **13 MB**, allowing for fast loading and easy
+  which is only around **18.8 MB**, for faster loading and easier
   sharing.
 
 - The full data-cleaning and preparation process is documented in  
   `data-raw/nba_shots.R`, ensuring full reproducibility.
 
-- If you need the full CSV version, you can follow the download link and
-  detailed steps  
+- If you need the full CSV version, you can follow the data source link
+  and detailed steps  
   provided in the **vignette** or the **pkgdown** documentation website.
 
 This design keeps the package lightweight while preserving data
@@ -181,8 +187,6 @@ browseVignettes("asg4nbashots")
 
 All documentation, including dataset details, functions, and vignettes,
 is also available through the package website (built with **pkgdown**):
-
-👉 **Pkgdown site:**
 <https://etc5523-2025.github.io/assignment-4-packages-and-shiny-apps-mozuqi25/>
 
 This site provides a structured overview of your data, functions, and
@@ -206,4 +210,4 @@ This package is released under the **MIT License**.
 You are free to use, modify, and distribute it with attribution.
 
 © **Mohammad Zulkifli Falaqi**, 2025  
-Part of the *ETC5523 – Communicating With Data* unit
+Part of the *ETC5523 - Communicating With Data* unit *Assignment 4*.

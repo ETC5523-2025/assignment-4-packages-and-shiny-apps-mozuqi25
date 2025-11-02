@@ -1,4 +1,24 @@
-url: ~
+url: https://etc5523-2025.github.io/assignment-4-packages-and-shiny-apps-mozuqi25/
 template:
   bootstrap: 5
+  bootswatch: flatly
+  assets:
+    - pkgdown/extra.css
 
+navbar:
+  structure:
+    left: [home, reference, articles]
+    right: [github]
+  components:
+    home:
+      text: "Home"
+      href: index.html
+    reference:
+      text: "Reference"
+      href: reference/index.html
+    articles:
+      text: "Article"
+      href: articles/intro-nbashots.html
+    github:
+      icon: fab fa-github
+      href: https://github.com/ETC5523-2025/assignment-4-packages-and-shiny-apps-mozuqi25

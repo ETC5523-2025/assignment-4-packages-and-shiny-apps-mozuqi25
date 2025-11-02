@@ -1,26 +1,28 @@
-#' NBA Shot Locations, 1997–2020 (Extended)
+#' NBA Shot Data, 1997–2020
 #'
-#' A dataset containing over 4.7 million NBA shot attempts from 1997 to 2020.
-#' Includes shot distance, court zones, shot type (2 or 3 points), and outcome information,
-#' suitable for statistical and visual exploration.
+#' Detailed shot-level data for over 4.7 million NBA attempts from 1997 to 2020,
+#' including shot type, distance, court zones, outcome, and season context for
+#' analysis of shot selection and efficiency, or interactive exploration via Shiny.
 #'
 #' @format A tibble with 4,729,512 rows and 11 variables:
 #' \describe{
-#'   \item{action_type}{factor — the specific shot action (e.g., Jump Shot, Layup, Dunk).}
-#'   \item{shot_distance}{integer — distance of the shot attempt, in feet.}
-#'   \item{shot_zone_basic}{factor — broad zone classification (e.g., Restricted Area, Mid-Range, Left Corner 3).}
-#'   \item{shot_zone_area}{factor — general court area (e.g., Left Side (L), Center (C), Right Side (R)).}
-#'   \item{shot_zone_range}{factor — distance category (e.g., Less Than 8 ft., 8–16 ft., 16–24 ft., 24+ ft.).}
-#'   \item{x_location}{integer — x-coordinate of the shot location on the court.}
-#'   \item{y_location}{integer — y-coordinate of the shot location on the court.}
-#'   \item{shot_type}{integer — numeric value of the shot: 2 or 3 points.}
-#'   \item{shot_made_flag}{integer — 1 if the shot was made, 0 if missed.}
-#'   \item{game_date}{Date — date of the game in YYYY-MM-DD format.}
-#'   \item{season_type}{factor — season category (e.g., Regular Season, Playoffs).}
+#'   \item{action_type}{factor — specific shot action (e.g., Jump Shot, Layup, Dunk).}
+#'   \item{shot_distance}{integer — distance in feet.}
+#'   \item{shot_zone_basic}{factor — broad shot zone (e.g., Restricted Area, Mid-Range, Left Corner 3).}
+#'   \item{shot_zone_area}{factor — court area (Left Side, Center, Right Side).}
+#'   \item{shot_zone_range}{factor — distance category (e.g., <8 ft, 8–16 ft, 16–24 ft, 24+ ft).}
+#'   \item{x_location}{integer — x-coordinate on court.}
+#'   \item{y_location}{integer — y-coordinate on court.}
+#'   \item{shot_type}{integer — shot value (2 or 3).}
+#'   \item{shot_made_flag}{integer — 1 if made, 0 if missed.}
+#'   \item{game_date}{Date — YYYY-MM-DD.}
+#'   \item{season_type}{factor — season category (Regular Season, Playoffs).}
 #' }
-#'
-#' @source Original data adapted from “2020 - June - NBA Shots (1997-2019)"
-#' available on [https://data.world/sportsvizsunday/june-2020-nba-shots-1997-2019](https://data.world/sportsvizsunday/june-2020-nba-shots-1997-2019),
+#' @source Public “NBA Shot Data 1997–2020” on
+#' \url{https://data.world/sportsvizsunday/june-2020-nba-shots-1997-2019};
+#' inspired by Stand-up Maths' video “We analysed 4,678,387 NBA shots”
+#' (\url{https://www.youtube.com/watch?v=yh5c3duQQ1w}). Differences in total
+#' rows (~4.7M vs 4.68M cited) likely reflect source compilation or filtering.
 #' cleaned and processed in `data-raw/nba_shots.R`.
 #'
 #' @examples
