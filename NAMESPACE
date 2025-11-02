@@ -2,3 +2,4 @@
 
 export(run_nbashots_app)
 export(shot_zone_summary)
+importFrom(shiny,runApp)

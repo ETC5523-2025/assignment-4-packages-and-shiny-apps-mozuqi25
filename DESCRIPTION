@@ -23,10 +23,10 @@ Depends:
 Imports:
     dplyr,
     lubridate,
-    shiny
-Suggests:
+    shiny,
     bslib,
-    ggplot2,
+    ggplot2
+Suggests:
     janitor,
     knitr,
     readr,

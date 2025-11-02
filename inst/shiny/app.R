@@ -3,6 +3,8 @@ library(dplyr)
 library(ggplot2)
 library(bslib)
 
+data("nba_shots", package = "asg4nbashots")
+
 ui <- page_fluid(
   theme = bs_theme(bootswatch = "flatly"),
   title = "NBA Shot Explorer",
@@ -51,6 +53,7 @@ server <- function(input, output, session) {
 
   output$scatter <- renderPlot({
     dat <- df_filtered()
+    req(nrow(dat) > 0)
     ggplot(dat, aes(x_location, y_location, color = factor(shot_made_flag))) +
       geom_point(alpha = 0.3, size = 0.5) +
       coord_fixed() +
@@ -61,6 +64,7 @@ server <- function(input, output, session) {
 
   output$distplot <- renderPlot({
     dat <- df_filtered()
+    req(nrow(dat) > 0)
     by_dist <- dat |>
       group_by(shot_distance) |>
       summarise(

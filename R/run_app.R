@@ -3,6 +3,9 @@
 #' Opens the interactive explorer bundled in this package.
 #' @return A running Shiny app.
 #' @export
+#' @importFrom shiny runApp
 run_nbashots_app <- function() {
-  shiny::shinyAppDir(system.file("app", package = "asg4nbashots"))
+  appDir <- system.file("shiny", package = "asg4nbashots")
+
+  shiny::runApp(appDir)
 }
