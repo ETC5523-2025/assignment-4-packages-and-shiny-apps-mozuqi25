@@ -135,6 +135,8 @@ summary_df <- nba_shots %>%
 ggplot(summary_df, aes(x = shot_distance)) +
   geom_point(aes(y = accuracy), color = "blue") +
   geom_point(aes(y = expected_points), color = "red") +
+  scale_x_continuous(limits = c(0, 33), breaks = seq(0, 33, by = 2.5)) +
+  scale_y_continuous(limits = c(0, 1.6), breaks = seq(0, 1.6, by = 0.2)) +
   labs(
     title = "Accuracy and Expected Points by Distance",
     x = "Shot Distance (feet)",
@@ -200,9 +202,6 @@ please open an issue or pull request on the project’s GitHub page:
 
 🔗
 <https://github.com/ETC5523-2025/assignment-4-packages-and-shiny-apps-mozuqi25>
-
-Before submitting major changes, kindly discuss them first through the
-issue tracker to ensure consistency with the package goals.
 
 ## License
 
