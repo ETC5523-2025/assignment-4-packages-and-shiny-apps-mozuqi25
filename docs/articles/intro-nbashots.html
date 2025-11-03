@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">asg4nbashots</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.5523</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,8 +36,8 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
-<li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="active nav-item"><a class="nav-link" href="../articles/intro-nbashots.html">Article</a></li>
+<li class="nav-item"><a class="nav-link" href="../reference/index.html">Documentation Reference</a></li>
+<li class="active nav-item"><a class="nav-link" href="../articles/index.html">Vignette Article</a></li>
       </ul>
 <ul class="navbar-nav">
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/ETC5523-2025/assignment-4-packages-and-shiny-apps-mozuqi25"><span class="fa fab fa-github"></span></a></li>
@@ -78,19 +78,20 @@ covering a similar scope. After cleaning and standardisation, our
 dataset contains ~4.7M shots (slightly more than 4.68M cited in the
 video), likely due to differences in source compilation or
 filtering.</p>
-<p>It allows users to:</p>
+<p>There are three common uses cases that we discuss in this
+vignette:</p>
 <ul>
-<li>Explore millions of NBA shot attempts by distance, zone, and season
-type<br>
+<li>Explore millions of NBA shot attempts by distance, zone, season
+type, and eight other shot variables (see <a href="https://etc5523-2025.github.io/assignment-4-packages-and-shiny-apps-mozuqi25/index.html#whats-in-the-data">What’s
+in the Data</a>).</li>
+<li>Summarise accuracy and expected points trends.<br>
 </li>
-<li>Summarise accuracy and expected points trends<br>
-</li>
-<li>Launch an interactive app for visual exploration</li>
+<li>Launch an interactive app for visual exploration.</li>
 </ul>
 <hr>
 </div>
 <div class="section level2">
-<h2 id="load-the-package-and-data">Load the package and data<a class="anchor" aria-label="anchor" href="#load-the-package-and-data"></a>
+<h2 id="first-thing-first-load-the-package-and-data">First thing first, load the package and data<a class="anchor" aria-label="anchor" href="#first-thing-first-load-the-package-and-data"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://etc5523-2025.github.io/assignment-4-packages-and-shiny-apps-mozuqi25/">asg4nbashots</a></span><span class="op">)</span></span>
@@ -156,30 +157,30 @@ built-in helper function.</p>
 </h2>
 <p>You can also look at field-goal accuracy by court zone and season
 type.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>nba_shots <span class="sc">|&gt;</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>  <span class="fu">group_by</span>(season_type, shot_zone_basic) <span class="sc">|&gt;</span></span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>    <span class="at">attempts =</span> <span class="fu">n</span>(),</span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>    <span class="at">made =</span> <span class="fu">sum</span>(shot_made_flag),</span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>    <span class="at">accuracy =</span> made <span class="sc">/</span> attempts,</span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> shot_zone_basic, <span class="at">y =</span> accuracy, <span class="at">fill =</span> season_type)) <span class="sc">+</span></span>
-<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
-<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Shot Accuracy by Zone and Season Type"</span>,</span>
-<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Shot Zone (Basic)"</span>,</span>
-<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Accuracy"</span></span>
-<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a>[chunk<span class="sc">-</span>end]</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">nba_shots</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">season_type</span>, <span class="va">shot_zone_basic</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span></span>
+<span>    attempts <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    made <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">shot_made_flag</span><span class="op">)</span>,</span>
+<span>    accuracy <span class="op">=</span> <span class="va">made</span> <span class="op">/</span> <span class="va">attempts</span>,</span>
+<span>    .groups <span class="op">=</span> <span class="st">"drop"</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">shot_zone_basic</span>, y <span class="op">=</span> <span class="va">accuracy</span>, fill <span class="op">=</span> <span class="va">season_type</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_col</a></span><span class="op">(</span>position <span class="op">=</span> <span class="st">"dodge"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html" class="external-link">coord_flip</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Shot Accuracy by Zone and Season Type"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"Shot Zone (Basic)"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Accuracy"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="launch-the-interactive-shiny-app">Launch the interactive Shiny app<a class="anchor" aria-label="anchor" href="#launch-the-interactive-shiny-app"></a>
 </h2>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># run_nbashots_app()</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/run_nbashots_app.html">run_nbashots_app</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>The app provides an interactive interface to explore shot location
 patterns,<br>
 accuracy by player or year, and expected points per distance.</p>
@@ -193,8 +194,8 @@ accuracy by player or year, and expected points per distance.</p>
 </li>
 <li>Packaged dataset: <code>data/nba_shots.rda</code> (≈18.8 MB)<br>
 </li>
-<li>Source: <em>data.world/sportsvizsunday</em> (cleaned and
-extended)</li>
+<li>Data Source: <em><a href="https://data.world/sportsvizsunday/june-2020-nba-shots-1997-2019" class="external-link">data.world/sportsvizsunday</a></em>
+(the original 857 MB raw-data)</li>
 </ul>
 <p>This ensures transparent and reproducible data preparation for
 analysis and visualisation.</p>

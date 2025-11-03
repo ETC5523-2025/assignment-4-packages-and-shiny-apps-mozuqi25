@@ -1,0 +1,147 @@
+---
+title: "Using the Shiny App"
+subtitle: "Walkthrough for the NBA Shot Data Explorer (1997–2020)"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using the Shiny App}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+collapse = TRUE,
+comment = "#>",
+fig.width = 8,
+fig.height = 5.2
+)
+```
+
+# Overview
+
+This vignette shows how to launch and use the interactive Shiny app bundled with **asg4nbashots** to explore shot locations, accuracy, and expected points across the 1997–2020 NBA seasons.
+
+You’ll learn how to:
+
+1. Launch the app from the package
+2. Use the sidebar controls (year, season type, outcomes)
+3. Read the two tabs (Shot Location Plot; Accuracy & Expected Points)
+4. Save/share reproducible settings
+
+---
+
+# 1) Install and load
+
+```{r, eval = FALSE}
+
+# Install (from GitHub)
+
+remotes::install_github("ETC5523-2025/assignment-4-packages-and-shiny-apps-mozuqi25")
+
+# Load the package
+
+library(asg4nbashots)
+
+# Optionally preview the dataset structure
+
+str(nba_shots)
+```
+
+---
+
+# 2) Launch the app
+
+Use the exported helper to open the bundled app.
+
+```{r, eval = FALSE}
+
+# Launch the app (opens in a browser window)
+
+asg4nbashots::run_nbashots_app()
+```
+
+> Tip: First launch can take a moment while R loads data and compiles packages.
+
+---
+
+# 3) Sidebar controls
+
+The left panel controls the data shown in both tabs.
+
+* **Show All Year Data (Overlay)**
+  Displays per-year points on the “Accuracy & Expected Points” tab (you’ll see a cloud of faint dots per distance).
+
+* **Average of Overall Years**
+  Shows the pooled average curve across all years (single dot per distance).
+
+* **Year slider**
+  When neither of the two checkboxes above is active, the slider filters the app to a specific year.
+
+* **Season type**
+  Choose Regular Season, Playoffs, or both.
+
+* **Shot Outcome** (Shot Location tab only)
+  Filter to Scored, Missed, or both.
+  (On the Accuracy tab, both are enforced since accuracy/expected points require both attempts and makes.)
+
+---
+
+# 4) Shot Location Plot (tab)
+
+What you’ll see:
+
+* Scatter of shots transformed to a single offensive half (left-hand side).
+* **Red** = scored, **blue** = missed. Darker areas = more attempts.
+* Reference lines mark baseline, half-court and sidelines.
+
+How to use:
+
+1. Toggle **Season type** to compare Playoffs vs Regular Season patterns.
+2. Use **Shot Outcome** to focus on scored-only patterns or missed-only clusters.
+3. Switch **Year** (or aggregate all years) to see historical changes.
+
+---
+
+# 5) Accuracy & Expected Points (tab)
+
+What you’ll see:
+
+* **Black** points = average shot accuracy by distance (made / attempts).
+* **Red** points = average expected points by distance (`mean(shot_type * shot_made_flag)`), so 3s count triple when made.
+* The x-axis caps at ~33 ft (≈ 400 in, half court). Grey vertical markers show key distances (e.g., ~2.5 ft, ~22–29 ft).
+
+Typical stories to look for:
+
+* Very close range (< 2.5 ft) has the highest accuracy.
+* Mid-range (≈ 2.5–22 ft) maintains fairly steady accuracy.
+* Long range (> 22 ft) accuracy drops, but expected points can **rise** near the 3-point line because made shots are worth 3.
+
+Good combos to try:
+
+* **Average of Overall Years** ON, **Show All Year Data (Overlay)** OFF → clean, pooled curves.
+* Turn **Overlay** ON → see per-year variability around the pooled curve.
+* Turn both OFF and pick a **Year** → one specific season.
+
+---
+
+# 6) Troubleshooting
+
+* **App won’t launch?** Restart R and try `asg4nbashots::run_nbashots_app()` again.
+* **Long first load?** That’s normal; the dataset is large. Later loads are faster.
+* **Nothing appears / red error in a plot?** Make sure at least one **Season type** is selected.
+* **Confusing results?** Check whether you’ve enabled overlays versus pooled averages, or chosen a specific year.
+
+---
+
+# 7) Session info
+
+```{r, eval = FALSE}
+sessionInfo()
+```
+
+---
+
+# Acknowledgements
+
+This app and dataset packaging were inspired by the Stand-up Maths video *“[We analysed 4,678,387 NBA shots](https://www.youtube.com/watch?v=yh5c3duQQ1w)”*. Source data come from public NBA shot logs (as hosted on [data.world/sportsvizsunday](https://data.world/sportsvizsunday/june-2020-nba-shots-1997-2019)). 
+

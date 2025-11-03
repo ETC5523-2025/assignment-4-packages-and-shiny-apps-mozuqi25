@@ -1,4 +1,4 @@
-#' Launch the NBA Shiny app
+#' Launch the NBA Shot Shiny app
 #'
 #' Opens the interactive explorer bundled in this package.
 #' @return A running Shiny app.

@@ -12,10 +12,10 @@ site](https://img.shields.io/badge/docs-pkgdown-blue.svg)](https://etc5523-2025.
 MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 <!-- badges: end -->
 
-`asg4nbashots` package provides cleaned **NBA Shot Data (1997–2020)**,
-including shot types, distances, court zones, outcomes, and season
-context, plus a bundled Shiny app for interactive exploration and
-visualisation.
+The `asg4nbashots` package provides cleaned **NBA Shot Data
+(1997–2020)**, including shot types, distances, court zones, outcomes,
+season context, etc., plus a bundled Shiny app for interactive
+exploration and visualisation.
 
 This package was inspired by the Stand-up Maths video **“[We analysed
 4,678,387 NBA shots](https://www.youtube.com/watch?v=yh5c3duQQ1w)”**.
@@ -38,9 +38,8 @@ source compilation or filtering differences.
   accuracy and expected-points trends
 - 📚 **Documentation:** includes help pages, a vignette, and a pkgdown
   website
-
-**Pkgdown site:**
-<https://etc5523-2025.github.io/assignment-4-packages-and-shiny-apps-mozuqi25/>
+- 🕸️ **pkgdown site:**
+  <https://etc5523-2025.github.io/assignment-4-packages-and-shiny-apps-mozuqi25/>
 
 ## Installation
 
@@ -167,9 +166,9 @@ frequent.
 - The full data-cleaning and preparation process is documented in  
   `data-raw/nba_shots.R`, ensuring full reproducibility.
 
-- If you need the full CSV version, you can follow the data source link
-  and detailed steps  
-  provided in the **vignette** or the **pkgdown** documentation website.
+- If you need the full original CSV version, you can follow the data
+  source link provided in the **vignette** or the **pkgdown**
+  documentation website.
 
 This design keeps the package lightweight while preserving data
 transparency.
@@ -188,20 +187,8 @@ browseVignettes("asg4nbashots")
 ```
 
 All documentation, including dataset details, functions, and vignettes,
-is also available through the package website (built with **pkgdown**):
-<https://etc5523-2025.github.io/assignment-4-packages-and-shiny-apps-mozuqi25/>
-
-This site provides a structured overview of your data, functions, and
-example analyses.
-
-## Contributing
-
-Contributions, feedback, and suggestions are always welcome!  
-If you notice a data issue, find a bug, or have an idea for improvement,
-please open an issue or pull request on the project’s GitHub page:
-
-🔗
-<https://github.com/ETC5523-2025/assignment-4-packages-and-shiny-apps-mozuqi25>
+is also available through [the package
+website](https://etc5523-2025.github.io/assignment-4-packages-and-shiny-apps-mozuqi25/).
 
 ## License
 

@@ -14,11 +14,11 @@ navbar:
       text: "Home"
       href: index.html
     reference:
-      text: "Reference"
+      text: "Documentation Reference"
       href: reference/index.html
     articles:
-      text: "Article"
-      href: articles/intro-nbashots.html
+      text: "Vignette Article"
+      href: articles/index.html
     github:
       icon: fab fa-github
       href: https://github.com/ETC5523-2025/assignment-4-packages-and-shiny-apps-mozuqi25

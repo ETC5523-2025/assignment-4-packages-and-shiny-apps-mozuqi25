@@ -25,15 +25,15 @@ The package was inspired by the Stand-up Maths video “[We analysed 4,678,387 N
 
 As the video does not publish a dataset or cleaning steps, I use the public “NBA Shot Data 1997–2020” on [data.world/sportsvizsunday](https://data.world/sportsvizsunday/june-2020-nba-shots-1997-2019), covering a similar scope. After cleaning and standardisation, our dataset contains ~4.7M shots (slightly more than 4.68M cited in the video), likely due to differences in source compilation or filtering.
 
-It allows users to:
+There are three common uses cases that we discuss in this vignette:
 
-- Explore millions of NBA shot attempts by distance, zone, and season type  
-- Summarise accuracy and expected points trends  
-- Launch an interactive app for visual exploration
+- Explore millions of NBA shot attempts by distance, zone, season type, and eight other shot variables (see [What's in the Data](https://etc5523-2025.github.io/assignment-4-packages-and-shiny-apps-mozuqi25/index.html#whats-in-the-data)). 
+- Summarise accuracy and expected points trends.  
+- Launch an interactive app for visual exploration.
 
 ---
 
-# Load the package and data
+# First thing first, load the package and data
 
 ``` {r, eval=FALSE}
 library(asg4nbashots)
@@ -122,14 +122,12 @@ nba_shots |>
     y = "Accuracy"
   ) +
   theme_minimal()
-[chunk-end]
-
 ```
 
 # Launch the interactive Shiny app
 
 ``` {r, eval=FALSE}
-# run_nbashots_app()
+run_nbashots_app()
 ```
 
 The app provides an interactive interface to explore shot location patterns,  
@@ -141,7 +139,7 @@ accuracy by player or year, and expected points per distance.
 
 - Data cleaning pipeline: `data-raw/nba_shots.R`  
 - Packaged dataset: `data/nba_shots.rda` (≈18.8 MB)  
-- Source: *data.world/sportsvizsunday* (cleaned and extended)
+- Data Source: *[data.world/sportsvizsunday](https://data.world/sportsvizsunday/june-2020-nba-shots-1997-2019)* (the original 857 MB raw-data)
 
 This ensures transparent and reproducible data preparation for analysis and visualisation.
 

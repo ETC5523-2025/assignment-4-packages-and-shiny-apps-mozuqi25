@@ -1,6 +1,6 @@
 Package: asg4nbashots
 Title: NBA Shot Data 1997–2020 Explorer
-Version: 0.0.0.9000
+Version: 0.0.1.5523
 Authors@R:
     person("Mohammad Zulkifli", "Falaqi", , "mfal0012@student.monash.edu", role = c("aut", "cre"))
 Description: Provides cleaned and extended NBA shot-level data from

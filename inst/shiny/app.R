@@ -14,9 +14,9 @@ ui <- page_navbar(
     sidebar = sidebar(
       width = 500,
       h4("Using the Shiny-App Dashboard"),
-      p("Adjust these options and slider field to explore the data through the Shot Location Plot and Average Accuracy & Expected Points Plot."),
+      p(HTML('Adjust these <i><u>options</u></i> and <i><u>slider field</u></i> to explore the data through the <b>Shot Location Plot</b> and <b>Average Accuracy & Expected Points Plot</b>.')),
       useShinyjs(),
-      p("1. Select the All Year Data, Average for Overall Data (for accuracy & expected points), or Select a Particular Year."),
+      p(HTML('1. Select the <i><u>All Year Data</i></u>, <i><u>Average for Overall Data</i></u> (for accuracy & expected points), or select a <i><u>Particular Year (from 1997 to 2020)</i></u>.')),
       checkboxInput("all_years",  "Show All Year Data (Overlay)", FALSE),  # per-year dots (accumulated/overlay)
       checkboxInput("avg_overall", "Average of Overall Years", TRUE),   # single pooled series
 
@@ -26,19 +26,22 @@ ui <- page_navbar(
                   value = min(lubridate::year(nba_shots$game_date), na.rm = TRUE),
                   sep = "", width = "100%"),
 
-      p("2. Select the Playoffs season, Regular season, or Both to see whether any interesting differences."),
+      p(HTML('2. Select the <i><u>Playoffs</i></u> season, <i><u>Regular</i></u> season, or <i><u>Both</i></u> to see whether any interesting differences.')),
       checkboxGroupInput(
         "season", "Season type:",
         choices  = levels(nba_shots$season_type),
         selected = levels(nba_shots$season_type)
       ),
-      p("3. Select the Scored Shot, Missed Shot, or Both to see the shoot success tendency by the shoot location/position."),
+      p(HTML('3. Select the <i><u>Scored Shot</i></u>, <i><u>Missed Shot</i></u>, or <i><u>Both</i></u> to see the shoot success tendency by the shoot location/position.')),
       checkboxGroupInput(
         "outcome", "Shot Outcome:",
         choices  = c("Scored" = "Scored", "Missed" = "Missed"),
         selected = c("Scored", "Missed")
       ),
       h4("About the Data"),
+      p(
+        HTML('This NBA Shot Data Explorer was inspired by the <a href="https://www.youtube.com/watch?v=yh5c3duQQ1w" target="_blank">Stand-up Maths</a> video <b>“We analysed 4,678,387 NBA shots”</b>. The raw dataset sourced from <b>“NBA Shot Data 1997–2020”</b> on <a href="https://data.world/sportsvizsunday/june-2020-nba-shots-1997-2019" target="_blank">data.world/sportsvizsunday.</a>')
+      ),
       p(
         HTML('Further information about this shiny-app, the <b>nba_shots</b> Dataset, and the <b>asg4nbashots</b> Package can be found <a href="https://etc5523-2025.github.io/assignment-4-packages-and-shiny-apps-mozuqi25/" target="_blank">here</a>.')
       )
@@ -47,18 +50,19 @@ ui <- page_navbar(
       id = "main_tabs",
       nav_panel("Shot Location Plot",
                 card(
-                  card_header("Shot Location Plot. All shots were transformed into one ring shot (Left-Hand Side)."),
+                  card_header("NBA Shot Location Plot. All shots were transformed into one ring shot (Left-Hand Side)."),
+                  p(HTML('<i>⚠️ Note: The shiny-app may take a few moments to load the first time you open it!</i>')),
                   plotOutput("scatter", height = 550),
                   div(class = "px-3 pb-3"),
-                  p("Output description: The blue dots represent missed shots, while the red dots represent successful shots. Darker areas indicate higher shot frequency. From the plot above, clear spatial patterns emerge over the 24-year period, most attempts cluster near the basket-ring and around the three-point line, reflecting consistent player preferences and strategic evolution in shot selection.")
+                  p(HTML('<b><u>Output description:</u></b> The <font color="blue">blue dots</font> represent <b>missed shots</b>, while the <font color="red">red dots</font> represent <b>successful shots</b>. Darker areas indicate higher shot frequency. From the plot above, clear spatial patterns emerge over the 24-year period, most attempts cluster near the basket-ring and around the three-point line, reflecting consistent player preferences and strategic evolution in shot selection.'))
                 )
       ),
       nav_panel("Accuracy Average & Expected Points Plot",
                 card(
-                  card_header("Accuracy Average & Expected Points by Distance. Calculated by number of scored shots and type of shot."),
+                  card_header("NBA Shot Accuracy Average & Expected Points by Distance. Calculated by number of scored shots and type of shot."),
                   plotOutput("distplot", height = 550),
                   div(class = "px-3 pb-3"),
-                  p("Output description: The lower dark-blue points represent the average shot accuracy by distance, while the upper red points represent the expected points scored. Although shots taken closer to the basket (< 2.5 ft) have the highest accuracy, medium-range shots (2.5–22 ft) maintain a relatively consistent success rate. Beyond 22 ft, accuracy declines as distance increases, yet a “sweet spot” emerges around 22–29 ft, where expected points remain higher or equal to mid-range attempts due to the added value of three-point shots.")
+                  p(HTML('<b><u>Output description:</u></b> The lower <font color="blue">blue points</font> represent <b>the average shot accuracy</b> by distance, while the upper <font color="red">red points</font> represent <b>the expected points scored</b>, calculated by multiplying the shot accuracy by either 2 or 3, depending on the shot type/position. Shots taken closer to the basket (< 2.5 ft) have the highest accuracy and medium-range shots (2.5–22 ft) maintain a relatively consistent success rate. Although beyond 22 ft accuracy declines as distance increases, yet a <i>“sweet spot”</i> emerges around 22–29 ft, where expected points remain higher or equal to mid-range attempts due to the added value of three-point shots.'))
                 )
       )
     )
@@ -118,11 +122,18 @@ server <- function(input, output, session) {
         labels = c("Missed", "Scored")
       ) +
       labs(
-        x = "Court Length (ft, baseline → half-court)",
-        y = "Court Width (ft, left → right)",
+        x = "Court Length (inch, 0 = the basket-ring board target)",
+        y = "Court Width (inch, 0 = the center point of basket-ring)",
         color = "Outcome"
       ) +
-      theme_minimal()
+      theme_minimal() +
+      theme(
+        axis.title.x = element_text(size = 14, face = "bold"),
+        axis.title.y = element_text(size = 14, face = "bold"),
+        axis.text = element_text(size = 14),
+        legend.title = element_text(size = 14, face = "bold"),
+        legend.text = element_text(size = 14)
+      )
   })
 
   output$distplot <- renderPlot({
@@ -158,7 +169,7 @@ server <- function(input, output, session) {
     }
 
     p <- ggplot(by_dist, aes(shot_distance)) +
-      geom_point(aes(y = accuracy)) +
+      geom_point(aes(y = accuracy), color = "blue") +
       geom_point(aes(y = expected_points), color = "red") +
       geom_vline(xintercept = c(2.5, 21.5, 29.5), color = "darkgrey", linewidth = 0.8) +
       scale_x_continuous(limits = c(0, 33), breaks = seq(0, 33, by = 2.5)) +
@@ -166,11 +177,17 @@ server <- function(input, output, session) {
       labs(
         title    = "Accuracy & Expected Points by Distance",
         subtitle = period_lab,
-        x = "Distance (ft, ~33 ft ≈ 400 in, half-court)",
-        y = "Average accuracy / expected points",
-        caption  = "Accuracy = mean(shot_made_flag). Expected points = mean(shot_type * shot_made_flag)."
+        x = "Distance (ft, 0 = basket-ring board position, total distance ~33 ft ≈ 400 in, half-court)",
+        y = "Average accuracy / expected points"
       ) +
-      theme_minimal()
+      theme_minimal()  +
+      theme(
+        axis.title.x = element_text(size = 14, face = "bold"),
+        axis.title.y = element_text(size = 14, face = "bold"),
+        axis.text = element_text(size = 14),
+        legend.title = element_text(size = 14, face = "bold"),
+        legend.text = element_text(size = 14)
+      )
 
     # overlay per-year points only when all_years = TRUE
     if (isTRUE(input$all_years)) {

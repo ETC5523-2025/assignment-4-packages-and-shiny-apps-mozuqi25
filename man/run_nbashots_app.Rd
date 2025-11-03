@@ -2,7 +2,7 @@
 % Please edit documentation in R/run_app.R
 \name{run_nbashots_app}
 \alias{run_nbashots_app}
-\title{Launch the NBA Shiny app}
+\title{Launch the NBA Shot Shiny app}
 \usage{
 run_nbashots_app()
 }
